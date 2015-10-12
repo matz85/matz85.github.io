@@ -134,8 +134,8 @@ footer{
 
 #gallery li{
   float: left;
-  width: 45%;
-  margin: 2.5%;
+  width: 30%;
+  margin: 1%;
   background-color: black;
   color: gold;
 }
