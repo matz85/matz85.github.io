@@ -8,7 +8,7 @@ body{
   }
 
 #wrapper {
-  max-width: 940px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 5%;
 }
@@ -134,7 +134,7 @@ footer{
 
 #gallery li{
   float: left;
-  width: 30%;
+  width: 28%;
   margin: 1%;
   background-color: black;
   color: gold;
