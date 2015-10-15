@@ -44,6 +44,12 @@ header{
 
 }
 
+header{
+    border-bottom: 5px solid gold;
+    margin-bottom: 60px;
+    width: 100%;
+    }
+
 
 }
 
