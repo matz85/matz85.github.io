@@ -35,7 +35,7 @@ h3{
 
 header{
   width: 100%;
-  background: url('poshhome_1.jpg') no-repeat center;
+  background: url('ty6 (11 of 16).jpg') no-repeat center;
   margin: center;
   text-align: center;
   max-width: 960px;
@@ -45,8 +45,8 @@ header{
 }
 
 header{
-    border-bottom: 5px solid gold;
-    margin-bottom: 60px;
+    border-bottom: 7px solid white;
+    margin-bottom: 65px;
     width: 100%;
     }
 
@@ -70,12 +70,12 @@ h2{
 }
 
 h3{
-  color: gold;
+  color: white;
   text-align: center;
 }
 
 p{
-  color: gold;
+  color: white;
   text-align: center;
 }
 /********************
@@ -143,14 +143,14 @@ footer{
   width: 28%;
   margin: 1%;
   background-color: black;
-  color: gold;
+  color: white;
 }
 
 #gallery li a p{
   margin: 0;
   padding: 5%;
   font-size: 0.75em;
-  color: gold;
+  color: white;
 }
 
 #overlay{
@@ -170,11 +170,11 @@ footer{
 }
 
 a{
-  color: gold;
+  color: white;
 }
 /*nav link*/
 nav a, nav a:visited{
-  color: yellow;
+  color: gold;
 }
 /*selected nav link*/
 nav a.selected, nav a:hover{
