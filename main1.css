@@ -1,9 +1,6 @@
 /********************
   GENERAL
 ********************/
-*{
-  display: inline block;
-}
 
 body{
   font-family:'Poiret One', sans-serif;
@@ -39,7 +36,7 @@ h3{
 header{
   width: 100%;
   background: url('') no-repeat center;
-  margin: center;
+  margin: 0 auto;
   text-align: center;
   max-width: 1080px;
   max-height: 1080px;
