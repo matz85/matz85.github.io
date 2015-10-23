@@ -1,202 +1,298 @@
-(function($, f) {
-	//  If there's no jQuery, Unslider can't work, so kill the operation.
-	if(!$) return f;
-	
-	var Unslider = function() {
-		//  Set up our elements
-		this.el = f;
-		this.items = f;
-		
-		//  Dimensions
-		this.sizes = [];
-		this.max = [0,0];
-		
-		//  Current inded
-		this.current = 0;
-		
-		//  Start/stop timer
-		this.interval = f;
-				
-		//  Set some options
-		this.opts = {
-			speed: 500,
-			delay: 3000, // f for no autoplay
-			complete: f, // when a slide's finished
-			keys: !f, // keyboard shortcuts - disable if it breaks things
-			dots: f, // display â€¢â€¢â€¢â€¢oâ€¢ pagination
-			fluid: f // is it a percentage width?,
-		};
-		
-		//  Create a deep clone for methods where context changes
-		var _ = this;
+$.Slideshow.defaults 		= {
+	// animation types:
+	// "sides" : new slides will slide in from left / right
+	// "center": new slides will appear in the center
+	animation			: 'sides', // sides || center
+	// if true the slider will automatically 
+	// slide, and it will only stop if the user 
+	// clicks on a thumb
+	autoplay			: false,
+	// interval for the slideshow
+	slideshow_interval	: 3000,
+	// speed for the sliding animation
+	speed			: 800,
+	// easing for the sliding animation
+	easing			: '',
+	// percentage of speed for the titles animation. 
+	// Speed will be speed * titlesFactor
+	titlesFactor		: 0.60,
+	// titles animation speed
+	titlespeed			: 800,
+	// titles animation easing
+	titleeasing			: '',
+	// maximum width for the thumbs in pixels
+	thumbMaxWidth		: 150
+};
 
-		this.init = function(el, opts) {
-			this.el = el;
-			this.ul = el.children('ul');
-			this.max = [el.outerWidth(), el.outerHeight()];			
-			this.items = this.ul.children('li').each(this.calculate);
+_init 				: function( options ) {
 			
-			//  Check whether we're passing any options in to Unslider
-			this.opts = $.extend(this.opts, opts);
-			
-			//  Set up the Unslider
-			this.setup();
-			
-			return this;
-		};
+	this.options 		= $.extend( true, {}, $.Slideshow.defaults, options );
+	
+	// set the opacity of the title elements and the image items
+	this.$imgItems.css( 'opacity', 0 );
+	this.$imgItems.find('div.ei-title > *').css( 'opacity', 0 );
+	
+	// index of current visible slider
+	this.current		= 0;
+	
+	var _self			= this;
+	
+	// preload images
+	// add loading status
+	this.$loading		= $('
+Loading
+').prependTo( _self.$el );
+	
+	$.when( this._preloadImages() ).done( function() {
 		
-		//  Get the width for an element
-		//  Pass a jQuery element as the context with .call(), and the index as a parameter: Unslider.calculate.call($('li:first'), 0)
-		this.calculate = function(index) {
-			var me = $(this),
-				width = me.outerWidth(), height = me.outerHeight();
-			
-			//  Add it to the sizes list
-			_.sizes[index] = [width, height];
-			
-			//  Set the max values
-			if(width > _.max[0]) _.max[0] = width;
-			if(height > _.max[1]) _.max[1] = height;
-		};
+		// hide loading status
+		_self.$loading.hide();
 		
-		//  Work out what methods need calling
-		this.setup = function() {
-			//  Set the main element
-			this.el.css({
-				overflow: 'hidden',
-				width: _.max[0],
-				height: this.items.first().outerHeight()
+		// calculate size and position for each image
+		_self._setImagesSize();
+		
+		// configure thumbs container
+		_self._initThumbs();
+		
+		// show first
+		_self.$imgItems.eq( _self.current ).css({
+			'opacity' 	: 1,
+			'z-index'	: 10
+		}).show().find('div.ei-title > *').css( 'opacity', 1 );
+		
+		// if autoplay is true
+		if( _self.options.autoplay ) {
+		
+			_self._startSlideshow();
+		
+		}
+		
+		// initialize the events
+		_self._initEvents();
+	
+	});
+	
+},
+
+_preloadImages		: function() {
+	
+	// preloads all the large images
+	
+	var _self	= this,
+		loaded	= 0;
+	
+	return $.Deferred(
+	
+		function(dfd) {
+	
+			_self.$images.each( function( i ) {
+				
+				$('').load( function() {
+				
+					if( ++loaded === _self.itemsCount ) {
+					
+						dfd.resolve();
+						
+					}
+				
+				}).attr( 'src', $(this).attr('src') );
+			
 			});
 			
-			//  Set the relative widths
-			this.ul.css({width: (this.items.length * 100) + '%', position: 'relative'});
-			this.items.css('width', (100 / this.items.length) + '%');
-			
-			if(this.opts.delay !== f) {
-				this.start();
-				this.el.hover(this.stop, this.start);
-			}
-			
-			//  Custom keyboard support
-			this.opts.keys && $(document).keydown(this.keys);
-			
-			//  Dot pagination
-			this.opts.dots && this.dots();
-			
-			//  Little patch for fluid-width sliders. Screw those guys.
-			if(this.opts.fluid) {
-				var resize = function() {
-					_.el.css('width', Math.min(Math.round((_.el.outerWidth() / _.el.parent().outerWidth()) * 100), 100) + '%');
-				};
-				
-				resize();
-				$(window).resize(resize);
-			}
-			
-			if(this.opts.arrows) {
-				this.el.parent().append('<p class="arrows"><span class="prev">â†</span><span class="next">â†’</span></p>')
-					.find('.arrows span').click(function() {
-						$.isFunction(_[this.className]) && _[this.className]();
-					});
-			};
-			
-			//  Swipe support
-			if($.event.swipe) {
-				this.el.on('swipeleft', _.prev).on('swiperight', _.next);
-			}
-		};
+		}
 		
-		//  Move Unslider to a slide index
-		this.move = function(index, cb) {
-			//  If it's out of bounds, go to the first slide
-			if(!this.items.eq(index).length) index = 0;
-			if(index < 0) index = (this.items.length - 1);
-			
-			var target = this.items.eq(index);
-			var obj = {height: target.outerHeight()};
-			var speed = cb ? 5 : this.opts.speed;
-			
-			if(!this.ul.is(':animated')) {			
-				//  Handle those pesky dots
-				_.el.find('.dot:eq(' + index + ')').addClass('active').siblings().removeClass('active');
-
-				this.el.animate(obj, speed) && this.ul.animate($.extend({left: '-' + index + '00%'}, obj), speed, function(data) {
-					_.current = index;
-					$.isFunction(_.opts.complete) && !cb && _.opts.complete(_.el);
-				});
-			}
-		};
-		
-		//  Autoplay functionality
-		this.start = function() {
-			_.interval = setInterval(function() {
-				_.move(_.current + 1);
-			}, _.opts.delay);
-		};
-		
-		//  Stop autoplay
-		this.stop = function() {
-			_.interval = clearInterval(_.interval);
-			return _;
-		};
-		
-		//  Keypresses
-		this.keys = function(e) {
-			var key = e.which;
-			var map = {
-				//  Prev/next
-				37: _.prev,
-				39: _.next,
-				
-				//  Esc
-				27: _.stop
-			};
-			
-			if($.isFunction(map[key])) {
-				map[key]();
-			}
-		};
-		
-		//  Arrow navigation
-		this.next = function() { return _.stop().move(_.current + 1) };
-		this.prev = function() { return _.stop().move(_.current - 1) };
-		
-		this.dots = function() {
-			//  Create the HTML
-			var html = '<ol class="dots">';
-				$.each(this.items, function(index) { html += '<li class="dot' + (index < 1 ? ' active' : '') + '">' + (index + 1) + '</li>'; });
-				html += '</ol>';
-			
-			//  Add it to the Unslider
-			this.el.addClass('has-dots').append(html).find('.dot').click(function() {
-				_.move($(this).index());
-			});
-		};
-	};
+	).promise();
 	
-	//  Create a jQuery plugin
-	$.fn.unslider = function(o) {
-		var len = this.length;
+},
+_setImagesSize		: function() {
+	
+	// save ei-slider's width
+	this.elWidth	= this.$el.width();
+	
+	var _self	= this;
+	
+	this.$images.each( function( i ) {
 		
-		//  Enable multiple-slider support
-		return this.each(function(index) {
-			//  Cache a copy of $(this), so it 
-			var me = $(this);
-			var instance = (new Unslider).init(me, o);
+		var $img	= $(this);
+			imgDim	= _self._getImageDim( $img.attr('src') );
 			
-			//  Invoke an Unslider instance
-			me.data('unslider' + (len > 1 ? '-' + (index + 1) : ''), instance);
+		$img.css({
+			width		: imgDim.width,
+			height		: imgDim.height,
+			marginLeft	: imgDim.left,
+			marginTop	: imgDim.top
 		});
-	};
-})(window.jQuery, false);
+		
+	});
 
-$(function() {
-    $('.banner').unslider({
-	speed: 500,               //  The speed to animate each slide (in milliseconds)
-	delay: 3000,              //  The delay between slide animations (in milliseconds)
-	complete: function() {},  //  A function that gets called after every slide animation
-	keys: true,               //  Enable keyboard (left, right) arrow shortcuts
-	dots: true,               //  Display dot navigation
-	fluid: true              //  Support responsive design. May break non-responsive designs
-});
-});
+},
+_getImageDim		: function( src ) {
+	
+	var $img    = new Image();
+					
+	$img.src    = src;
+			
+	var c_w		= this.elWidth,
+		c_h		= this.$el.height(),
+		r_w		= c_h / c_w,
+		
+		i_w		= $img.width,
+		i_h		= $img.height,
+		r_i		= i_h / i_w,
+		new_w, new_h, new_left, new_top;
+			
+	if( r_w > r_i ) {
+		
+		new_h	= c_h;
+		new_w	= c_h / r_i;
+	
+	}
+	else {
+	
+		new_h	= c_w * r_i;
+		new_w	= c_w;
+	
+	}
+			
+	return {
+		width	: new_w,
+		height	: new_h,
+		left	: ( c_w - new_w ) / 2,
+		top		: ( c_h - new_h ) / 2
+	};
+
+},
+_initThumbs			: function() {
+
+	// set the max-width of the slider elements to the one set in the plugin's options
+	// also, the width of each slider element will be 100% / total number of elements
+	this.$sliderElems.css({
+		'max-width' : this.options.thumbMaxWidth + 'px',
+		'width'		: 100 / this.itemsCount + '%'
+	});
+	
+	// set the max-width of the slider and show it
+	this.$sliderthumbs.css( 'max-width', this.options.thumbMaxWidth * this.itemsCount + 'px' ).show();
+	
+},
+_startSlideshow		: function() {
+
+	var _self	= this;
+	
+	this.slideshow	= setTimeout( function() {
+		
+		var pos;
+		
+		( _self.current === _self.itemsCount - 1 ) ? pos = 0 : pos = _self.current + 1;
+		
+		_self._slideTo( pos );
+		
+		if( _self.options.autoplay ) {
+		
+			_self._startSlideshow();
+		
+		}
+	
+	}, this.options.slideshow_interval);
+
+},
+
+_slideTo			: function( pos ) {
+	
+	// return if clicking the same element or if currently animating
+	if( pos === this.current || this.isAnimating )
+		return false;
+	
+	this.isAnimating	= true;
+	
+	var $currentSlide	= this.$imgItems.eq( this.current ),
+		$nextSlide		= this.$imgItems.eq( pos ),
+		_self			= this,
+		
+		preCSS			= {zIndex	: 10},
+		animCSS			= {opacity	: 1};
+	
+	// new slide will slide in from left or right side
+	if( this.options.animation === 'sides' ) {
+		
+		preCSS.left		= ( pos > this.current ) ? -1 * this.elWidth : this.elWidth;
+		animCSS.left	= 0;
+	
+	}	
+	
+	// titles animation
+	$nextSlide.find('div.ei-title > h2')
+			  .css( 'margin-right', 50 + 'px' )
+			  .stop()
+			  .delay( this.options.speed * this.options.titlesFactor )
+			  .animate({ marginRight : 0 + 'px', opacity : 1 }, this.options.titlespeed, this.options.titleeasing )
+			  .end()
+			  .find('div.ei-title > h3')
+			  .css( 'margin-right', -50 + 'px' )
+			  .stop()
+			  .delay( this.options.speed * this.options.titlesFactor )
+			  .animate({ marginRight : 0 + 'px', opacity : 1 }, this.options.titlespeed, this.options.titleeasing )
+	
+	$.when(
+		
+		// fade out current titles
+		$currentSlide.css( 'z-index' , 1 ).find('div.ei-title > *').stop().fadeOut( this.options.speed / 2, function() {
+			// reset style
+			$(this).show().css( 'opacity', 0 );	
+		}),
+		
+		// animate next slide in
+		$nextSlide.css( preCSS ).stop().animate( animCSS, this.options.speed, this.options.easing ),
+		
+		// "sliding div" moves to new position
+		this.$sliderElem.stop().animate({
+			left	: this.$thumbs.eq( pos ).position().left
+		}, this.options.speed )
+		
+	).done( function() {
+		
+		// reset values
+			$currentSlide.css( 'opacity' , 0 ).find('div.ei-title > *').css( 'opacity', 0 );
+			$nextSlide.css( 'z-index', 1 );
+			_self.current	= pos;
+			_self.isAnimating		= false;
+		
+		});
+		
+},
+
+_initEvents			: function() {
+	
+	var _self	= this;
+	
+	// window resize
+	$(window).on( 'smartresize.eislideshow', function( event ) {
+		
+		// resize the images
+		_self._setImagesSize();
+	
+		// reset position of thumbs sliding div
+		_self.$sliderElem.css( 'left', _self.$thumbs.eq( _self.current ).position().left );
+	
+	});
+	
+	// click the thumbs
+	this.$thumbs.on( 'click.eislideshow', function( event ) {
+		
+		if( _self.options.autoplay ) {
+		
+			clearTimeout( _self.slideshow );
+			_self.options.autoplay	= false;
+		
+		}
+		
+		var $thumb	= $(this),
+			idx		= $thumb.index() - 1; // exclude sliding div
+			
+		_self._slideTo( idx );
+		
+		return false;
+	
+	});
+	
+}
