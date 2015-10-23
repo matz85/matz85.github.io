@@ -26,9 +26,6 @@ h3{
   
 }
 
-.banner { position: relative; overflow: auto; }
-    .banner li { list-style: none; }
-        .banner ul li { float: left; }
 
 
 /*links*/
@@ -200,4 +197,36 @@ nav a.selected, nav a:hover{
   float:left;
   width:100%;
   position: relative;
+}
+
+.banner { 
+	position: relative;
+	overflow: auto;
+	width:100%;
+	top:-74px;
+	padding: 0px;
+	margin: 0px;
+	z-index:-10;
+}
+.banner ul{
+	margin:0px;
+	padding:0px;
+}
+.banner li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+.banner ul li {
+	float: left;
+	display:block;
+	min-height:370px;
+	margin:0px;
+	padding:0px;
+	-webkit-background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-o-background-size: 100% auto;
+	-ms-background-size: 100% auto;
+	background-size: 100% auto;
+	background-position-y:-75px;
 }
