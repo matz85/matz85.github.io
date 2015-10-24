@@ -2,9 +2,33 @@
 <html>
   <head>
     <title> POSH|HOME </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="main1.css">
     <link rel="stylesheet" href="responsive1.css
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <!-- FlexSlider -->
+    <script type="text/javascript" src="flexslider-min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var $ = jQuery.noConflict();
+    $(window).load(function() {
+    $('.flexslider').flexslider({
+          animation: "fade"
+    });
+    $(function() {
+        $('.show_menu').click(function(){
+                $('.menu').fadeIn();
+                $('.show_menu').fadeOut();
+                $('.hide_menu').fadeIn();
+        });
+        $('.hide_menu').click(function(){
+                $('.menu').fadeOut();
+                $('.show_menu').fadeIn();
+                $('.hide_menu').fadeOut();
+        });
+    });
+   });
+  </script>
   </head>
   <body>
     <header>
@@ -17,112 +41,35 @@
         </ul>
       </nav>  
     </header>
-      <section class="headerbox">
-        <!-- TOP - BOTTOM -->
-          <!-- BOX ONE -->
-        <div class="box-image">
-        <input type="radio" id="box-image-1" name="box-group-1" checked />
-        <label for="box-image-1">&bull;</label>
-        <div id="photo_1" class="box-photo" style="background-image:url('ty6 (1 of 16).jpg');">
-        </div></div>
-          <!-- BOX TWO -->
-        <div class="box-image">
-        <input type="radio" id="box-image-2" name="box-group-1" />
-        <label for="box-image-2" class="divider">&bull;</label>
-        <div id="photo_2" class="box-photo" style="background-image:url('ty6 (2 of 16).jpg')">
-        </div></div>
-        
-        <!-- LEFT - RIGHT -->
-          <!-- BOX THREE -->
-        <div class="box-image">
-        <input type="radio" id="box-image-3" name="box-group-1" />
-        <label for="box-image-3">&bull;</label>
-        <div id="photo_3" class="box-photo" style="background-image:url('ty6 (3 of 16).jpg')">
-        </div></div>
-          <!-- BOX FOUR -->
-        <div class="box-image">
-        <input type="radio" id="box-image-4" name="box-group-1" />
-        <label for="box-image-4" class="divider">&bull;</label>
-        <div id="photo_4" class="box-photo" style="background-image:url('ty6 (4 of 16).jpg')">
-        </div></div>
-        
-        <!-- TOP LEFT - BOTTOM RIGHT -->
-          <!-- BOX FIVE -->
-        <div class="box-image">
-        <input type="radio" id="box-image-5" name="box-group-1" />
-        <label for="box-image-5">&bull;</label>
-        <div id="photo_5" class="box-photo" style="background-image:url('ty6 (5 of 16).jpg')">
-        </div></div>
-          <!-- BOX SIX -->
-        <div class="box-image">
-        <input type="radio" id="box-image-6" name="box-group-1" />
-        <label for="box-image-6" class="divider">&bull;</label>
-        <div id="photo_6" class="box-photo" style="background-image:url('ty6 (6 of 16).jpg')">
-        </div></div>
-        
-        <!-- TOP RIGHT - BOTTOM LEFT -->
-          <!-- BOX SEVEN -->
-        <div class="box-image">
-        <input type="radio" id="box-image-7" name="box-group-1" />
-        <label for="box-image-7">&bull;</label>
-        <div id="photo_7" class="box-photo" style="background-image:url('ty6 (7 of 16).jpg')">
-        </div></div>
-          <!-- BOX EIGHT -->
-        <div class="box-image">
-        <input type="radio" id="box-image-8" name="box-group-1" />
-        <label for="box-image-8" class="divider">&bull;</label>
-        <div id="photo_8" class="box-photo" style="background-image:url('ty6 (8 of 16).jpg')">
-        </div></div>
-        
-        <!-- FADE IN-OUT -->
-          <!-- BOX NINE -->
-        <div class="box-image">
-        <input type="radio" id="box-image-9" name="box-group-1" />
-        <label for="box-image-9">&bull;</label>
-        <div id="photo_9" class="box-photo" style="background-image:url('ty6 (9 of 16).jpg')">
-        </div></div>
-          <!-- BOX TEN -->
-        <div class="box-image">
-        <input type="radio" id="box-image-10" name="box-group-1" />
-        <label for="box-image-10" class="divider">&bull;</label>
-        <div id="photo_10" class="box-photo" style="background-image:url('ty6 (10 of 16).jpg')">
-        </div></div>
-        
-        <!-- SCALE MIDDLE-OUT -->
-          <!-- BOX ELEVEN -->
-        <div class="box-image">
-        <input type="radio" id="box-image-11" name="box-group-1" />
-        <label for="box-image-11">&bull;</label>
-        <div id="photo_11" class="box-photo" style="background-image:url('ty6 (11 of 16).jpg')">
-        </div></div>
-          <!-- BOX TWELVE -->
-        <div class="box-image">
-        <input type="radio" id="box-image-12" name="box-group-1" />
-        <label for="box-image-12" class="divider">&bull;</label>
-        <div id="photo_12" class="box-photo" style="background-image:url('ty6 (12 of 16).jpg')">
-        </div></div>
-        
-        <!-- NO TRANSITION -->
-          <!-- BOX THIRTREEN -->
-        <div class="box-image">
-        <input type="radio" id="box-image-13" name="box-group-1" />
-        <label for="box-image-13">&bull;</label>
-        <div id="photo_13" class="box-photo" style="background-image:url('ty6 (13 of 16).jpg')">
-        </div></div>
-          <!-- BOX FOURREEN -->
-        <div class="box-image">
-        <input type="radio" id="box-image-14" name="box-group-1" />
-        <label for="box-image-14" class="divider">&bull;</label>
-        <div id="photo_14" class="box-photo" style="background-image:url('ty6 (14 of 16).jpg')">
-        </div></div>
-          <!-- BOX FIFTEEN -->
-        <div class="box-image">
-        <input type="radio" id="box-image-15" name="box-group-1" />
-        <label for="box-image-15" class="divider">&bull;</label>
-        <div id="photo_15" class="box-photo" style="background-image:url('ty6 (16 of 16).jpg')">
-        </div></div>
-      </section>
-    
+      <div class="slider_container">
+        <div class="flexslider">
+          <ul class="slides">
+            <li>
+                <a href="ty6 (1 of 16).jpg"><img src="ty6 (1 of 16).jpg" alt="" title=""/></a>
+                <div class="flex-caption">
+                     <div class="caption_title_line"><h2>preview</p></div>
+                </div>
+            </li>
+            <li>
+                <a href="ty6 (2 of 16).jpg"><img src="ty6 (2 of 16).jpg" alt="" title=""/></a>
+                <div class="flex-caption">
+                     <div class="caption_title_line"><h2>preview</p></div>
+                </div>
+            </li>
+            <li>
+                <a href="ty6 (3 of 16).jpg"><img src="ty6 (3 of 16).jpg" alt="" title=""/></a>
+                <div class="flex-caption">
+                     <div class="caption_title_line"><h2>preview</p></div>
+                </div>
+            </li><li>
+                <a href="ty6 (4 of 16).jpg"><img src="ty6 (4 of 16).jpg" alt="" title=""/></a>
+                <div class="flex-caption">
+                     <div class="caption_title_line"><h2>preview</p></div>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
           
           
       <footer>
