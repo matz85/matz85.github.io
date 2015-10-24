@@ -4,9 +4,9 @@
     <title> POSH HOME </title>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="main1.css">
-    <link rel="stylesheet" href="galleria.classic.css">
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="galleria-1.4.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery.chocolat.js"></script>
+    <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen" charset="utf-8">
   </head>
   <body>
     <header>
@@ -19,15 +19,18 @@
         </ul>
       </nav>
     </header>
-    <div class="galleria">
-        <img src="ty6 (1 of 16).jpg">
-        <img src="ty6 (2 of 16).jpg">
-        <img src="ty6 (3 of 16).jpg">
-        <img src="ty6 (4 of 16).jpg">
-    </div>
+      <div class="chocolat-parent" data-chocolat-title="set title">
+      <a class="chocolat-image" href="ty6 (1 of 16).jpg" title="caption image 1">
+      </a>
+      <a class="chocolat-image" href="ty6 (2 of 16).jpg" title="caption image 2">
+      </a>
+      <a class="chocolat-image" href="ty6 (3 of 16).jpg" title="caption image 3">
+      </a>
+      </div>
     <script type="text/javascript">
-    	Galleria.loadTheme('galleria.classic.min.js');
-    	Galleria.run('.galleria');
+    	$(document).ready(function(){
+      $('.chocolat-parent').Chocolat();
+      });
     </script>            
           
       <footer>
