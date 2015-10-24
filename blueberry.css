@@ -12,7 +12,7 @@
 }
 .blueberry .slides li img {
 	display: block;
-	width: 65%;
+	width: 45%;
 	max-width: none;
 }
 .blueberry .slides li.active { display: block; position: relative; }
