@@ -4,10 +4,9 @@
     <title> POSH HOME </title>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="main1.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <script src="photo-gallery.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="bootstrap-image-gallery.min.css">
   </head>
   <body>
     <header>
@@ -20,29 +19,58 @@
         </ul>
       </nav>
     </header>
-      <div class="container">
-        <ul class="row">
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (1 of 16).jpg"/></li>
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (2 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (3 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (4 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (5 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (6 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (7 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (8 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (9 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (10 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (11 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (12 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (13 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (14 of 16).jpg"/></li> 
-          <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img src="ty6 (16 of 16).jpg"/></li>
-        </ul>
+    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+      <div id="blueimp-gallery" class="blueimp-gallery">
+          <!-- The container for the modal slides -->
+          <div class="slides"></div>
+          <!-- Controls for the borderless lightbox -->
+          <h3 class="title"></h3>
+          <a class="prev">‹</a>
+          <a class="next">›</a>
+          <a class="close">×</a>
+          <a class="play-pause"></a>
+          <ol class="indicator"></ol>
+          <!-- The modal dialog, which will be used to wrap the lightbox content -->
+          <div class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title"></h4>
+                      </div>
+                      <div class="modal-body next"></div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left prev">
+                              <i class="glyphicon glyphicon-chevron-left"></i>
+                              Previous
+                          </button>
+                          <button type="button" class="btn btn-primary next">
+                              Next
+                              <i class="glyphicon glyphicon-chevron-right"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id="links">
+        <a href="ty6 (1 of 16).jpg" title="Vase" data-gallery>
+          <img src="thumbnails/ty6 (1 of 16).jpg" alt="Vase">
+        </a>
+        <a href="ty6 (2 of 16).jpg" title="Beauty Products" data-gallery>
+          <img src="thumbnails/ty6 (2 of 16).jpg" alt="Beauty Products">
+        </a>
+        <a href="ty6 (3 of 16).jpg" title="Tin" data-gallery>
+          <img src="thumbnails/ty6 (3 of 16).jpg" alt="Tin">
+        </a>
       </div>
       <footer>
         <a href="https://www.instagram.com/posh_home_louisville"><img src="images.jpg" alt="Instagram Logo" class="social-icon"></a>
         <a href="https://www.facebook.com/poshhomelouisville"><img src="imgres.png" alt="Facebook Logo" class="social-icon"></a>
         <p>&copy; 2015 POSH HOME.</p>
       </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="bootstrap-image-gallery.min.js"></script>
   </body>
 </html>
