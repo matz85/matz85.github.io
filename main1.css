@@ -126,6 +126,20 @@ footer{
   background: black;
 }
 
+#gallery{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#gallery li{
+  float: left;
+  width: 30%;
+  margin: 1%;
+  background-color: black;
+  color: gold;
+}
+
 .img-responsive {
   display: block;
   max-width: 100%;
