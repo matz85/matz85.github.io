@@ -132,6 +132,7 @@ footer{
 }
 
 #gallery{
+  background: black;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -141,8 +142,7 @@ footer{
   float: left;
   width: 30%;
   margin: 1%;
-  background-color: black;
-  color: gold;
+  background: black;
 }
 
 .img-responsive {
