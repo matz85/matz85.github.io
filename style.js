@@ -1,4 +1,3 @@
-
 var $overlay = $('<div id="overlay"></div>');
 var $image = $("<img>");
 var $caption = $("<p></p>")
@@ -12,7 +11,7 @@ $("body").append($overlay);
 
 
 
-$(".row a").click(function(event){
+$("#gallery a").click(function(event){
 	event.preventDefault();
 	var imageLocation = $(this).attr("href");
 	
