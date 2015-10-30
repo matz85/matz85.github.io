@@ -2,9 +2,9 @@
   GENERAL
 ********************/
 
- body{
+ header, body{
   font-family:'Poiret One', sans-serif;
-  background-color: black;
+  background: black;
   }
 
 
