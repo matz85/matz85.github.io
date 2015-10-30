@@ -43,7 +43,7 @@ template {
   display: none;
 }
 a {
-  background-color: black;
+  background-color
 }
 a:active,
 a:hover {
@@ -6286,7 +6286,7 @@ button.close {
 }
 .carousel-inner {
   position: relative;
-  width: 100%;
+  width: 75%;
   overflow: hidden;
 }
 .carousel-inner > .item {
@@ -6451,8 +6451,8 @@ button.close {
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 1.0);
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
   border: 1px solid #fff;
   border-radius: 10px;
 }
