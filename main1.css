@@ -2,7 +2,7 @@
   GENERAL
 ********************/
 
- html{
+ header, body, #myCarousel{
   font-family:'Poiret One', sans-serif;
   background: black;
   }
