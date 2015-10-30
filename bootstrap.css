@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: 'Poiret One', sans-serif;
+  font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -43,7 +43,7 @@ template {
   display: none;
 }
 a {
-  background-color
+  background-color: transparent;
 }
 a:active,
 a:hover {
@@ -1082,7 +1082,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: 'Poiret One', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poriet One', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1103,7 +1103,7 @@ a {
 a:hover,
 a:focus {
   color: #23527c;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -1134,7 +1134,7 @@ img {
   height: auto;
   padding: 4px;
   line-height: 1.42857143;
-  background-color: black;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all .2s ease-in-out;
@@ -2250,7 +2250,7 @@ pre code {
   }
 }
 table {
-  background-color: black;
+  background-color: transparent;
 }
 caption {
   padding-top: 8px;
@@ -5967,7 +5967,7 @@ button.close {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: black;
+  background-color: #000;
 }
 .modal-backdrop.fade {
   filter: alpha(opacity=0);
@@ -6286,7 +6286,7 @@ button.close {
 }
 .carousel-inner {
   position: relative;
-  width: 75%;
+  width: 100%;
   overflow: hidden;
 }
 .carousel-inner > .item {
@@ -6460,7 +6460,7 @@ button.close {
   width: 12px;
   height: 12px;
   margin: 0;
-  background-color: black;
+  background-color: #fff;
 }
 .carousel-caption {
   position: absolute;
