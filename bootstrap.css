@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: "Poriet One", sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -1124,6 +1124,7 @@ img {
   display: inline-block ;
   max-width: 100%;
   height: auto;
+  margin: 0;
 }
 .img-rounded {
   border-radius: 6px;
