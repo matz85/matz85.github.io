@@ -61,7 +61,7 @@ h1{
 }
 
 h2{
-  font-size: 1.7em;
+  font-size: 2.6em;
   margin: -5px 0 0;
   font-weight: normal;
   color: gold;
@@ -70,13 +70,13 @@ h2{
 h3{
   color: white;
   text-align: center;
-  font-size: 1.4em ;
+  font-size: 2.2em ;
 }
 
 p{
   color: white;
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.8em;
 }
 /********************
   NAVIGATION
